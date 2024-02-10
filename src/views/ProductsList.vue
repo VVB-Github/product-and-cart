@@ -1,3 +1,3 @@
 <template>
-    <h1 id="ProductList">ProductList</h1>
+    <h1>ProductList</h1>
 </template>
