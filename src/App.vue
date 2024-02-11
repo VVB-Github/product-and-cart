@@ -12,14 +12,57 @@
         <span>Past Orders</span>
       </router-link>
     </nav>
-    <!-- <router-link @click="toggleSidebar" class="top-bar-cart-link">
+    <div @click="toggleSidebar" class="top-bar-cart-link">
       <i class="icofont-cart-alt icofont-1x"></i>
       <span>Cart ({{ totalQuantity }})</span>
-    </router-link> -->
+    </div>
   </header>
-  <router-view/>
+  <router-view :inventory="inventory" :addToCart="addToCart"/>
+
+  <SideBar
+    v-if="show_Sidebar"
+    :toggle="toggleSidebar"
+    :cart="cart"
+    :inventory="inventory"
+    :remove="removeItem"
+  />
 </template>
 
-<!-- thanks to the scoped keyword, styles described here only affect page in this file -->
-<style scoped>
-</style>
+<script>
+import SideBar from './components/SideBar.vue'
+import food from './food.json'
+
+export default {
+  components: {
+    SideBar
+  },
+  data () {
+    return {
+      show_Sidebar: false,
+      inventory: food,
+      cart: {}
+    }
+  },
+  computed: {
+    totalQuantity () {
+      return Object.values(this.cart).reduce((acc, curr) => {
+        return acc + curr
+      }, 0)
+    }
+  },
+  methods: {
+    addToCart (name, quantity) {
+      if (!this.cart[name]) this.cart[name] = 0
+
+      // this.cart[type] += quantity
+      this.cart[name] += quantity
+    },
+    toggleSidebar () {
+      this.show_Sidebar = !this.show_Sidebar
+    },
+    removeItem (name) {
+      delete this.cart[name]
+    }
+  }
+}
+</script>
