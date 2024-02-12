@@ -32,7 +32,7 @@
   <!-- эта строка передает аргументы инвентори и функцию. Чат-жпт пишет что это якобы не стандартный метод передачи
   пропсов () пропсы inventory и addToCart предполагается передать в компонент, который отображается <router-view>
   в зависимости от текущего маршрута. -->
-  <router-view :inventory="inventory" :addToCart="addToCart"/>
+  <router-view :inventory="inventory" :addToCart="addToCart" :pastorders="pastorders"/>
 
   <SideBar
     v-if="show_Sidebar"
@@ -102,7 +102,8 @@ export default {
     },
     // добавляем текущий карт в произведённые покупки как единый словарь с приписанным к нему датой
     addPastOrder () {
-      this.pastorders[`order_${Date.now()}`] = { ...this.cart }
+      this.pastorders[`${Date.now()}`] = { ...this.cart }
+      console.log(this.pastorders)
     }
   }
 }
