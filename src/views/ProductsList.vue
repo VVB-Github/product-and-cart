@@ -1,5 +1,5 @@
+<!-- страница с 6-ю товарами в наличии -->
 <template>
-    <h1>ProductList</h1>
     <main class="wrapper">
         <h1>Products</h1>
 

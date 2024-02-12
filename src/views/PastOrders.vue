@@ -1,5 +1,5 @@
+<!-- пока что статичная информация -->
 <template>
-    <h1>ProductList2</h1>
     <main class="wrapper">
         <h1>Past Orders</h1>
 
