@@ -83,10 +83,14 @@ export default {
   },
   methods: {
     addToCart (name, quantity) {
-      /* если такого товара нет то инициализируем счётчик товара в ноль */
-      if (!this.cart[name]) this.cart[name] = 0
-      /* и далее приплюсовываем в значение числа товара quantity - оно вводится?? */
-      this.cart[name] += quantity
+      if (quantity < 0) {
+        alert('Значение не может быть меньше нуля.')
+      } else {
+        /* если такого товара нет то инициализируем счётчик товара в ноль */
+        if (!this.cart[name]) this.cart[name] = 0
+        /* и далее приплюсовываем в значение числа товара quantity - оно вводится?? */
+        this.cart[name] += quantity
+      }
     },
     /* функция смены флага для показа сайдбара на противоположный */
     toggleSidebar () {

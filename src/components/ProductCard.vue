@@ -70,8 +70,22 @@ export default {
   В Vue.js, значение, заданное в data(), является начальным состоянием данных компонента */
   data () {
     return {
+    //   internalQuantity: 0
       quantity: 0
     }
   }
+  /* логика приведённая сдесь не дает записать отрицательное значение продуктов */
+//   computed: {
+//     quantity: {
+//       get () {
+//         // Геттер просто возвращает значение
+//         return this.internalQuantity
+//       },
+//       set (value) {
+//         // Сеттер обновляет значение, убеждаясь, что оно не меньше 0
+//         this.internalQuantity = value < 0 ? 0 : value
+//       }
+//     }
+//   }
 }
 </script>
