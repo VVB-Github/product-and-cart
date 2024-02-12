@@ -105,7 +105,8 @@
           <div class="spread">
             <!-- ункция calculateTotal описанна в этом файле -->
             <span><strong>Total:</strong> $ {{ calculateTotal() }}</span>
-            <button class="btn btn-light">Checkout</button>
+            <!-- при нажатии на кнопку совершается функция покупки -->
+            <button @click="Purchase" class="btn btn-light">Purchase</button>
           </div>
         </div>
       </div>
@@ -114,9 +115,16 @@
 
 <script>
 export default {
-  props: ['toggle', 'cart', 'inventory', 'remove'],
+  props: ['toggle', 'cart', 'inventory', 'remove', 'pastorders'],
   /* в методах мы описываем наши функции которые будут работать в этом файле, хоть их можно и экспортировать */
   methods: {
+    Purchase () {
+      /* this.$emit используется для создания пользовательского события. Компонент, вызывающий this.$emit,
+      излучает событие вверх по дереву компонентов, позволяя родительским компонентам прослушивать эти события
+      через директиву v-on (или @ в шаблонах). */
+      this.$emit('addPastOrder')
+      this.$emit('clearCart')
+    },
     getPrice (name) {
       /* this.inventory.find((p) => { ... })
         использует метод find массива в JavaScript для поиска

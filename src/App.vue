@@ -37,9 +37,10 @@
   <SideBar
     v-if="show_Sidebar"
     :toggle="toggleSidebar"
-    :cart="cart"
+    :cart="cart" @clearCart="clearCart"
     :inventory="inventory"
     :remove="removeItem"
+    :pastorders="pastorders" @addPastOrder="addPastOrder"
   />
 </template>
 
@@ -57,7 +58,8 @@ export default {
     return {
       show_Sidebar: false,
       inventory: food,
-      cart: {}
+      cart: {},
+      pastorders: {}
     }
   },
   /* computed свойства автоматически пересчитываются, когда зависимые реактивные данные изменяются. Это идеально
@@ -93,6 +95,14 @@ export default {
     /* с помощью функции delete (из нативного js) - удаляем некоторый товар из корзины */
     removeItem (name) {
       delete this.cart[name]
+    },
+    /* очистка корзины (для функции покупки) */
+    clearCart () {
+      this.cart = {}
+    },
+    // добавляем текущий карт в произведённые покупки как единый словарь с приписанным к нему датой
+    addPastOrder () {
+      this.pastorders[`order_${Date.now()}`] = { ...this.cart }
     }
   }
 }
